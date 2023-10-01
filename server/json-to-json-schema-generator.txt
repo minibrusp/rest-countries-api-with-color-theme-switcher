@@ -1,0 +1,391 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "type": "array",
+    "items": {
+        "$ref": "#/definitions/Welcome8Element"
+    },
+    "definitions": {
+        "Welcome8Element": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "topLevelDomain": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "alpha2Code": {
+                    "type": "string"
+                },
+                "alpha3Code": {
+                    "type": "string"
+                },
+                "callingCodes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "capital": {
+                    "type": "string"
+                },
+                "altSpellings": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "subregion": {
+                    "type": "string"
+                },
+                "region": {
+                    "$ref": "#/definitions/Region"
+                },
+                "population": {
+                    "type": "integer"
+                },
+                "latlng": {
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                },
+                "demonym": {
+                    "type": "string"
+                },
+                "area": {
+                    "type": "number"
+                },
+                "timezones": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "borders": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "nativeName": {
+                    "type": "string"
+                },
+                "numericCode": {
+                    "type": "string"
+                },
+                "flags": {
+                    "$ref": "#/definitions/Flags"
+                },
+                "currencies": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Currency"
+                    }
+                },
+                "languages": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Language"
+                    }
+                },
+                "translations": {
+                    "$ref": "#/definitions/Translations"
+                },
+                "flag": {
+                    "type": "string",
+                    "format": "uri",
+                    "qt-uri-protocols": [
+                        "https"
+                    ],
+                    "qt-uri-extensions": [
+                        ".svg"
+                    ]
+                },
+                "regionalBlocs": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/RegionalBloc"
+                    }
+                },
+                "cioc": {
+                    "type": "string"
+                },
+                "independent": {
+                    "type": "boolean"
+                },
+                "gini": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "alpha2Code",
+                "alpha3Code",
+                "callingCodes",
+                "demonym",
+                "flag",
+                "flags",
+                "independent",
+                "languages",
+                "name",
+                "nativeName",
+                "numericCode",
+                "population",
+                "region",
+                "subregion",
+                "timezones",
+                "topLevelDomain",
+                "translations"
+            ],
+            "title": "Welcome8Element"
+        },
+        "Currency": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "symbol": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "code",
+                "name",
+                "symbol"
+            ],
+            "title": "Currency"
+        },
+        "Flags": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "svg": {
+                    "type": "string",
+                    "format": "uri",
+                    "qt-uri-protocols": [
+                        "https"
+                    ],
+                    "qt-uri-extensions": [
+                        ".svg"
+                    ]
+                },
+                "png": {
+                    "type": "string",
+                    "format": "uri",
+                    "qt-uri-protocols": [
+                        "https"
+                    ],
+                    "qt-uri-extensions": [
+                        ".png"
+                    ]
+                }
+            },
+            "required": [
+                "png",
+                "svg"
+            ],
+            "title": "Flags"
+        },
+        "Language": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "iso639_1": {
+                    "type": "string"
+                },
+                "iso639_2": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "nativeName": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "iso639_2",
+                "name"
+            ],
+            "title": "Language"
+        },
+        "RegionalBloc": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "acronym": {
+                    "$ref": "#/definitions/Acronym"
+                },
+                "name": {
+                    "$ref": "#/definitions/Name"
+                },
+                "otherNames": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/OtherName"
+                    }
+                },
+                "otherAcronyms": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/OtherAcronym"
+                    }
+                }
+            },
+            "required": [
+                "acronym",
+                "name"
+            ],
+            "title": "RegionalBloc"
+        },
+        "Translations": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "br": {
+                    "type": "string"
+                },
+                "pt": {
+                    "type": "string"
+                },
+                "nl": {
+                    "type": "string"
+                },
+                "hr": {
+                    "type": "string"
+                },
+                "fa": {
+                    "type": "string"
+                },
+                "de": {
+                    "type": "string"
+                },
+                "es": {
+                    "type": "string"
+                },
+                "fr": {
+                    "type": "string"
+                },
+                "ja": {
+                    "type": "string"
+                },
+                "it": {
+                    "type": "string"
+                },
+                "hu": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "br",
+                "de",
+                "es",
+                "fr",
+                "hr",
+                "hu",
+                "it",
+                "ja",
+                "nl",
+                "pt"
+            ],
+            "title": "Translations"
+        },
+        "Region": {
+            "type": "string",
+            "enum": [
+                "Asia",
+                "Europe",
+                "Africa",
+                "Oceania",
+                "Americas",
+                "Polar",
+                "Antarctic Ocean",
+                "Antarctic"
+            ],
+            "title": "Region"
+        },
+        "Acronym": {
+            "type": "string",
+            "enum": [
+                "SAARC",
+                "EU",
+                "CEFTA",
+                "AU",
+                "AL",
+                "CARICOM",
+                "USAN",
+                "EEU",
+                "CAIS",
+                "ASEAN",
+                "NAFTA",
+                "PA",
+                "EFTA"
+            ],
+            "title": "Acronym"
+        },
+        "Name": {
+            "type": "string",
+            "enum": [
+                "South Asian Association for Regional Cooperation",
+                "European Union",
+                "Central European Free Trade Agreement",
+                "African Union",
+                "Arab League",
+                "Caribbean Community",
+                "Union of South American Nations",
+                "Eurasian Economic Union",
+                "Central American Integration System",
+                "Association of Southeast Asian Nations",
+                "North American Free Trade Agreement",
+                "Pacific Alliance",
+                "European Free Trade Association"
+            ],
+            "title": "Name"
+        },
+        "OtherAcronym": {
+            "type": "string",
+            "enum": [
+                "UNASUR",
+                "UNASUL",
+                "UZAN",
+                "EAEU",
+                "SICA"
+            ],
+            "title": "OtherAcronym"
+        },
+        "OtherName": {
+            "type": "string",
+            "enum": [
+                "الاتحاد الأفريقي",
+                "Union africaine",
+                "União Africana",
+                "Unión Africana",
+                "Umoja wa Afrika",
+                "جامعة الدول العربية",
+                "Jāmiʻat ad-Duwal al-ʻArabīyah",
+                "League of Arab States",
+                "Comunidad del Caribe",
+                "Communauté Caribéenne",
+                "Caribische Gemeenschap",
+                "Unión de Naciones Suramericanas",
+                "União de Nações Sul-Americanas",
+                "Unie van Zuid-Amerikaanse Naties",
+                "South American Union",
+                "Sistema de la Integración Centroamericana,",
+                "Tratado de Libre Comercio de América del Norte",
+                "Accord de Libre-échange Nord-Américain",
+                "Alianza del Pacífico"
+            ],
+            "title": "OtherName"
+        }
+    }
+}

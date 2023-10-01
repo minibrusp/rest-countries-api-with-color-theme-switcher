@@ -1,0 +1,72 @@
+type FlagSource {
+  svg: String,
+  png: String
+}
+
+type Currency {
+  code: String,
+  name: String,
+  symbol: String
+}
+
+type Language {
+  iso639_1: String,
+  iso639_2: String,
+  name: String,
+  nativeName: String,
+}
+
+type Translation {
+  br: String
+  pt: String
+  nl: String
+  hr: String
+  fa: String
+  de: String
+  es: String
+  fr: String
+  ja: String
+  it: String
+  hu: String
+}
+
+type RegionalBloc {
+  acronym: String,
+  name: String,
+  otherAcronyms: [String]
+  otherNames: [String]
+}
+
+type Country {
+  _id: ID,
+  name: String,
+  topLevelDomain: [String],
+  alpha2Code: String,
+  alpha3Code: String,
+  callingCodes: [String],
+  capital: String,
+  altSpellings: [String],
+  subregion: String,
+  region: String,
+  population: Int,
+  latlng: [Int],
+  demonym: String,
+  area: Int,
+  timezones: [String],
+  borders: [String],
+  nativeName: String,
+  numericCode: String,
+  flags: FlagSource,
+  currencies: [Currency],
+  languages: [Language],
+  translations: Translation,
+  flag: String,
+  regionalBlocs: [RegionalBloc],
+  cioc: String,
+  independent: Boolean
+}
+
+type Query {
+  countries(offset: Int, limit: Int, filter: String): [Country!]
+  country(id: ID!): Country
+}
