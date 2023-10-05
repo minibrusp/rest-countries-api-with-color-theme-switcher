@@ -3,6 +3,7 @@ import Layout from "../layout"
 import QueryResult from "../components/QueryResult"
 import { useQuery, gql, ApolloError } from "@apollo/client"
 import { useEffect } from "react"
+import CountriesHeader from "../components/CountriesHeader"
 
 const COUNTRIES = gql`
   query CountriesQuery($limit: Int, $offset: Int, $filter: String) {
@@ -43,11 +44,15 @@ function Countries() {
   return (
     <main>
       <Layout>
-        <QueryResult error={error} loading={loading} data={data}>
-          <span>{data?.countries?.map((country: Country) => (
-            <div key={country.name}>{country.name}</div>
-          ))}</span>
-        </QueryResult>
+        <section>
+          <h2 className="hidden invisible">Countries</h2>
+          <CountriesHeader />
+          <QueryResult error={error} loading={loading} data={data}>
+            <span>{data?.countries?.map((country: Country) => (
+              <div key={country.name}>{country.name}</div>
+            ))}</span>
+          </QueryResult>
+        </section>
       </Layout>
     </main>
   )

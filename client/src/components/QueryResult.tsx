@@ -29,7 +29,7 @@ const QueryResult = ({ loading, error, data, children }: props ) => {
     )
   }
 
-  return (
+  if(data) return (
     <>
       { children }
     </>
