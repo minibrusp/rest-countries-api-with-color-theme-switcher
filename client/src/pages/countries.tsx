@@ -2,8 +2,10 @@
 import Layout from "../layout"
 import QueryResult from "../components/QueryResult"
 import { useQuery, gql, ApolloError } from "@apollo/client"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import CountriesHeader from "../components/CountriesHeader"
+import CountryCard from "../components/CountryCard"
+import Pagination from "../components/Pagination"
 
 const COUNTRIES = gql`
   query CountriesQuery($limit: Int, $offset: Int, $filter: String) {
@@ -12,7 +14,10 @@ const COUNTRIES = gql`
       name
       region
       capital
-      timezones
+      population
+      flags {
+        png
+      }
     }
 }
 `
@@ -22,18 +27,24 @@ export type Country = {
   name: string,
   region: string,
   _id: string,
-  timezones: string[]
+  flags: {
+    png: string
+  },
+  population: number
 }
 
 export type Query = {
   countries?: Country[]
 }
 
+const PAGE_SIZE = 10
+
 function Countries() {
+  const [page, setPage] = useState(0)
   const { loading, error, data } = useQuery<Query>(COUNTRIES, {
     variables: {
-      offset: 0,
-      limit: 10
+      offset: page * PAGE_SIZE,
+      limit: PAGE_SIZE
     }
   })
 
@@ -48,10 +59,18 @@ function Countries() {
           <h2 className="hidden invisible">Countries</h2>
           <CountriesHeader />
           <QueryResult error={error} loading={loading} data={data}>
-            <span>{data?.countries?.map((country: Country) => (
-              <div key={country.name}>{country.name}</div>
-            ))}</span>
+            <div className="flex flex-col justify-center items-center gap-[50px]">
+              { data?.countries?.map((country: Country) => (
+                <CountryCard key={country.name} country={country} />
+              ))}
+            </div>
           </QueryResult>
+          <Pagination
+            setPage={setPage}
+            currentPage={page}
+            Offset={page * PAGE_SIZE}  
+            data={data} 
+          />
         </section>
       </Layout>
     </main>
