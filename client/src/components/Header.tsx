@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { HiOutlineMoon } from "react-icons/hi2";
 
 const Header = () => {
@@ -6,13 +6,30 @@ const Header = () => {
 
   const changeTheme = () => {
     if(isDarkTheme) {
-      setIsDarkTheme(!isDarkTheme)
+      setIsDarkTheme(false)
       document.documentElement.classList.remove('dark')
+      localStorage.setItem('color-theme', JSON.stringify(isDarkTheme))
       return
     }
-    setIsDarkTheme(!isDarkTheme)
+    setIsDarkTheme(true)
     document.documentElement.classList.add('dark')
+    localStorage.setItem('color-theme', JSON.stringify(isDarkTheme))
   }
+
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem('color-theme')!) === true || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+        setIsDarkTheme(true)
+    } else {
+        document.documentElement.classList.remove('dark')
+    }
+}, [])
+
+useEffect(() => {
+    let app = document.documentElement
+    isDarkTheme ? app.classList.add('dark') : app.classList.remove('dark')
+    localStorage.setItem('color-theme', JSON.stringify(isDarkTheme))
+  }, [isDarkTheme])
 
   return (
     <header className="text-very-dark-blue-txt bg-white-txt-elem flex justify-between items-center px-4 py-8 shadow-lg shadow-dark-gray-input/10 dark:text-white-txt-elem dark:bg-dark-blue dark:shadow-sm dark:shadow-very-dark-blue-bg">

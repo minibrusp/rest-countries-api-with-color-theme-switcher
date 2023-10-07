@@ -1,26 +1,13 @@
 // import { useQuery, gql } from "@apollo/client"
 import Layout from "../layout"
 import QueryResult from "../components/QueryResult"
-import { useQuery, gql, ApolloError } from "@apollo/client"
+import { useQuery, ApolloError } from "@apollo/client"
 import { useEffect, useState } from "react"
 import CountriesHeader from "../components/CountriesHeader"
 import CountryCard from "../components/CountryCard"
 import Pagination from "../components/Pagination"
+import { COUNTRIES } from "../graphql/query"
 
-const COUNTRIES = gql`
-  query CountriesQuery($limit: Int, $offset: Int, $filter: String) {
-    countries(limit: $limit, offset: $offset, filter: $filter) {
-      _id
-      name
-      region
-      capital
-      population
-      flags {
-        png
-      }
-    }
-}
-`
 
 export type Country = {
   capital: string,
