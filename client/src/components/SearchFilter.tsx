@@ -1,18 +1,18 @@
-import { useDeferredValue } from "react"
 import { HiOutlineSearch } from "react-icons/hi"
+import { useCountriesStore } from "../stores/useCountriesStore"
 
-type SearchFilterProps = {
-  setSearchFilter:  React.Dispatch<React.SetStateAction<string>>,
-  searchFilter: string
-}
 
-export default function SearchFilter({ setSearchFilter, searchFilter } : SearchFilterProps ) {
 
-  const deferedSearchValue = useDeferredValue(searchFilter)
+export default function SearchFilter() {
+
+  const searchFilter = useCountriesStore((state) => state.searchFilter)
+  const updateSearchFilter = useCountriesStore((state) => state.updateSearchFilter)
+  const updatePage = useCountriesStore((state) => state.updatePage)
   
 
   const handleSearchChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchFilter(e.target.value)
+    updatePage("RESET")
+    updateSearchFilter(e.target.value)
   }
 
   return (
@@ -25,7 +25,7 @@ export default function SearchFilter({ setSearchFilter, searchFilter } : SearchF
         placeholder="Search for a country..."
         className="h-14 w-full pl-20 pr-8 font-Nunito-Sans text-sm rounded-[7px] text-very-dark-blue-txt bg-white-txt-elem dark:text-white-txt-elem dark:bg-dark-blue dark:placeholder-white-txt-elem"
         onChange={handleSearchChange}
-        value={deferedSearchValue}
+        value={searchFilter}
       />
     </div>
   )

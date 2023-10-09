@@ -1,4 +1,5 @@
-import { Country } from "../pages/countries";
+import { Country } from "../types/types";
+
 
 
 export default function CountryCard({ country } : { country: Country }) {

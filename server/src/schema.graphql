@@ -66,7 +66,12 @@ type Country {
   independent: Boolean
 }
 
+type getCountries {
+  countries: [Country!],
+  count: Int
+}
+
 type Query {
-  countries(offset: Int, limit: Int, filter: String): [Country!]
+  getCountries(offset: Int, limit: Int, selectFilter: String, searchFilter: String): getCountries!
   country(id: ID!): Country
 }

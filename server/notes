@@ -4,3 +4,12 @@
 
 
  db.countries.find({"name": {$regex: "Korea"}})
+
+  db.countries.find({"region":"Americas"}).
+count()
+
+
+db.countries.find({"region": "Asia", "name": {$regex: "Kor"}})
+
+
+db.countries.countDocuments({"region": "Asia", "name": {$regex: ""}})

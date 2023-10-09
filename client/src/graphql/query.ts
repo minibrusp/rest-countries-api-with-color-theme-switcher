@@ -1,16 +1,22 @@
 import { gql } from "@apollo/client"
 
 export const COUNTRIES = gql`
-  query CountriesQuery($limit: Int, $offset: Int, $filter: String) {
-    countries(limit: $limit, offset: $offset, filter: $filter) {
-      _id
-      name
-      region
-      capital
-      population
-      flags {
-        png
+  query GetCountries($offset: Int, $limit: Int, $selectFilter: String, $searchFilter: String) {
+    getCountries(offset: $offset, limit: $limit, selectFilter: $selectFilter, searchFilter: $searchFilter) {
+      count
+      countries {
+        _id
+        name
+        region
+        capital
+        population
+        flag
+        flags {
+          png
+          svg
+        }
       }
     }
-}
+  }
 `
+

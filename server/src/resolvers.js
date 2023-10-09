@@ -6,14 +6,17 @@ const resolvers = {
     id: (parent) => parent.id ?? parent._id,
   },
   Query: {
-    async countries(_, { offset, limit, filter }, context) {
+    async getCountries(_, { offset, limit, selectFilter, searchFilter }, context) {
       let collection = await db.collection("countries")
-      if(filter) {
-        const countries = await collection.find({ "region": filter }).skip(offset).limit(limit).toArray()
-        return countries
+      if(selectFilter !== "All") {
+        const count = await collection.countDocuments({"region": selectFilter, "name": { $regex: searchFilter, $options: "i" } })
+        const countries = await collection.find({ "region": selectFilter, "name": { $regex: searchFilter, $options: "i" } }).skip(offset).limit(limit).toArray()
+        console.log({ ...countries, count });
+        return { countries, count }
       }
-      const countries = await collection.find().skip(offset).limit(limit).toArray()
-      return countries
+      const count = await collection.countDocuments({"name": { $regex: searchFilter, $options: "i" }})
+      const countries = await collection.find({"name": { $regex: searchFilter, $options: "i" }}).skip(offset).limit(limit).toArray()
+      return { countries, count }
     },
     async country(_, { id }, context) {
       let collection = await db.collection("countries")

@@ -1,20 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaGreaterThan } from "react-icons/fa6";
-import { typeSelected } from "./CountriesHeader";
+import { typeSelected } from "../types/types";
+import { useCountriesStore } from "../stores/useCountriesStore";
 
-type DropdownFilterProps = {
-  selected: typeSelected,
-  setSelected: React.Dispatch<React.SetStateAction<typeSelected>>
-}
 
-export default function DropdownFilter({ selected, setSelected } : DropdownFilterProps ) {
+export default function DropdownFilter() {
+
+  const selectFilter = useCountriesStore((state) => state.selectFilter)
+  const updateSelectFilter = useCountriesStore((state) => state.updateSelectFilter)
+  const page = useCountriesStore((state) => state.page)
+  const updatePage = useCountriesStore((state) => state.updatePage)
 
   const [isOpen, setIsOpen] = useState(false)
 
   const handleSelect = (event: React.MouseEvent<HTMLLIElement>) => {
-    setSelected(event.currentTarget.textContent as React.SetStateAction<typeSelected>)
+    updateSelectFilter(event.currentTarget.textContent as typeSelected)
+    updatePage("RESET")
     setIsOpen(false)
   }
+
+  useEffect(() => {
+    console.log(page);
+    
+  }, [page])
 
   return (
     <div className="relative">
@@ -22,7 +30,7 @@ export default function DropdownFilter({ selected, setSelected } : DropdownFilte
           onClick={() => setIsOpen(!isOpen)}
         >
           <span>
-            {selected !== "All" ? selected : "Filter by Region"}
+            {selectFilter !== "All" ? selectFilter : "Filter by Region"}
           </span>
           <span className="absolute top-1/2 -translate-y-1/2 right-[1.7rem] rotate-90 scale-y-100 scale-x-[0.7]">
             <FaGreaterThan className="h-3 w-3" />

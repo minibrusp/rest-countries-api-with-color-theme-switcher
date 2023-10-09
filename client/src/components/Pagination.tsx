@@ -1,39 +1,48 @@
-import { useEffect } from "react";
-import { Query } from "../pages/countries";
-
-type PaginationProps = {
-  currentPage: number,
-  setPage: React.Dispatch<React.SetStateAction<number>>,
-  Offset: number,
-  data: Query | undefined
-}
+import { useEffect, useMemo } from "react";
+import { PaginationProps } from "../types/types";
 
 
-export default function Pagination({ currentPage, setPage, Offset, data } : PaginationProps) {
+export default function Pagination({ currentPage, setPage, Offset, data, isLoading } : PaginationProps) {
 
   useEffect(() => {
-    console.log(`data countries length: `, data?.countries?.length);
-    console.log(`currentPage: `, currentPage);
+    console.log(`data countries length: `, data?.getCountries.countries?.length);
+    console.log(`currentPage: `, currentPage + 1);
     console.log(`Offset: `, Offset);
     
-  }, [data?.countries])
+  }, [data?.getCountries.countries])
+
+  const MAX_PAGE = useMemo(() => {
+    let result = data?.getCountries.count! / 10
+    
+    return Math.ceil(result)
+  }, [data?.getCountries.count])
 
   return (
     <div className="py-8 flex flex-row justify-center items-center gap-2 w-full">
       <button 
-        className={` p-2 rounded-lg text-xs cursor-pointer ${currentPage == 0 ? "bg-red-400" : "bg-sky-500" } ${currentPage == 0 ? "cursor-auto" : "cursor-pointer" }`} disabled={currentPage < 1}
-        onClick={() => setPage((prev) => prev - 1)}
+        className={` p-2 rounded-lg text-xs cursor-pointer ${currentPage == 0 ? "bg-red-400" : "bg-sky-500" } ${currentPage == 0 ? "cursor-auto" : "cursor-pointer" }`} 
+        disabled={currentPage < 1 || isLoading}
+        onClick={() => setPage("PREV")}
       >
         Prev
       </button>
-      <span 
-      className="bg-sky-500 p-2 rounded-lg text-xs"
-      >
-        {currentPage + 1}
-      </span>
+      {
+        isLoading ? (
+          <span className="bg-sky-500 p-2 rounded-lg text-xs">
+            loading...
+          </span>
+        ) : (
+          <span 
+          className="bg-sky-500 p-2 rounded-lg text-xs"
+          >
+            {`${currentPage + 1} of ${ MAX_PAGE}`}
+          </span>
+        )
+      }
       <button 
-      className={`bg-sky-500 p-2 rounded-lg text-xs cursor-pointer ${currentPage == 0 ? "bg-red-400" : "bg-sky-500" } ${currentPage == 0 ? "cursor-auto" : "cursor-pointer" }`}
-      onClick={() => setPage((prev) => prev + 1)}
+      className={` p-2 rounded-lg text-xs ${((currentPage + 1) >= MAX_PAGE) ? "bg-red-400" : "bg-sky-500" } ${((currentPage + 1) >= 25) ? "cursor-auto" : "cursor-pointer" }`}
+      disabled={((currentPage + 1) >= MAX_PAGE) || isLoading}
+      onClick={() => setPage("NEXT")}
       >
         Next
       </button>
