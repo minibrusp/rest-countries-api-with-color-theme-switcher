@@ -11,7 +11,6 @@ const resolvers = {
       if(selectFilter !== "All") {
         const count = await collection.countDocuments({"region": selectFilter, "name": { $regex: searchFilter, $options: "i" } })
         const countries = await collection.find({ "region": selectFilter, "name": { $regex: searchFilter, $options: "i" } }).skip(offset).limit(limit).toArray()
-        console.log({ ...countries, count });
         return { countries, count }
       }
       const count = await collection.countDocuments({"name": { $regex: searchFilter, $options: "i" }})

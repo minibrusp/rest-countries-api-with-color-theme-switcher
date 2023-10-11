@@ -1,17 +1,38 @@
-export type Country = {
-  capital: string,
-  name: string,
-  region: string,
+export type currency = {
+  name: string
+}
+
+export type language = {
+  name: string
+}
+
+export type borders = string
+
+export type CountryType = {
   _id: string,
+  name: string,
+  nativeName?: string,
+  population: number,
+  region: string,
+  subregion?: string,
+  capital: string,
+  topLevelDomain?: string,
+  currencies?: currency[] | undefined,
+  flag: string,
   flags: {
     png: string
   },
-  population: number
+  languages?: language[] | undefined
+  borders?: borders[]
 }
 
 export type CountriesAndCount = {
   count: number,
-  countries?: Country[]
+  countries?: CountryType[]
+}
+
+export type QuerySingleCountry = {
+  country: CountryType
 }
 
 

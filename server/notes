@@ -13,3 +13,6 @@ db.countries.find({"region": "Asia", "name": {$regex: "Kor"}})
 
 
 db.countries.countDocuments({"region": "Asia", "name": {$regex: ""}})
+
+
+ db.countries.createIndex({"alpha3Code": 1})

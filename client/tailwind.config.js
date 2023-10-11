@@ -17,6 +17,10 @@ export default {
         "dark-gray-input": 'hsl(0, 0%, 52%)',
         "very-light-gray-bg": 'hsl(0, 0%, 98%)',
         "white-txt-elem": 'hsl(0, 0%, 100%)',
+      },
+      boxShadow: {
+        "back-box": '0px 0px 10px 0px rgba(215,215,215,1)',
+        "back-box-dark": '0px 0px 16px 0px rgba(26,39,48,1.000)',
       }
     },
   },

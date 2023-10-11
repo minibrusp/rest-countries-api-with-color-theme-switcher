@@ -20,3 +20,30 @@ export const COUNTRIES = gql`
   }
 `
 
+export const COUNTRY = gql`
+  query Country($id: ID!) {
+    country(id: $id) {
+      _id
+      name
+      flag
+      flags {
+        png
+        svg
+      }
+      nativeName
+      population
+      region
+      subregion
+      capital
+      topLevelDomain
+      currencies {
+        name
+      }
+      languages {
+        name
+      }
+      borders
+    }
+  }
+`
+

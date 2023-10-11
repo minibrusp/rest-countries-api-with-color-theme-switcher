@@ -7,7 +7,7 @@ import CountriesHeader from "../components/CountriesHeader"
 import CountryCard from "../components/CountryCard"
 import Pagination from "../components/Pagination"
 import { COUNTRIES } from "../graphql/query"
-import { Country, QueryListOfCountry } from "../types/types"
+import { CountryType, QueryListOfCountry } from "../types/types"
 import { useCountriesStore } from "../stores/useCountriesStore"
 
 
@@ -41,7 +41,7 @@ function Countries() {
           <CountriesHeader />
           <QueryResult error={error} loading={loading} data={data}>
             <div className="flex flex-col justify-center items-center gap-[50px]">
-              { data?.getCountries.countries?.map((country: Country) => (
+              { data?.getCountries.countries?.map((country: CountryType) => (
                 <CountryCard key={country.name} country={country} />
               ))}
             </div>
