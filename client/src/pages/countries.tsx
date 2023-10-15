@@ -36,11 +36,11 @@ function Countries() {
   return (
     <main>
       <Layout>
-        <section>
+        <section className="xl:max-w-[1440px] xl:mx-auto">
           <h2 className="hidden invisible">Countries</h2>
           <CountriesHeader />
           <QueryResult error={error} loading={loading} data={data}>
-            <div className="flex flex-col justify-center items-center gap-[50px]">
+            <div className="flex flex-row flex-wrap justify-center items-center gap-[50px] sm:pt-4 sm:items-start xl:gap-16">
               { data?.getCountries.countries?.map((country: CountryType) => (
                 <CountryCard key={country.name} country={country} />
               ))}

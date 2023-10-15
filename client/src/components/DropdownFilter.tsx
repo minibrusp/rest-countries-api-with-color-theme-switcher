@@ -26,7 +26,7 @@ export default function DropdownFilter() {
 
   return (
     <div className="relative">
-        <div className="dropdown text-very-dark-blue-txt bg-white-txt-elem px-[1.7rem] py-[1.25rem] cursor-pointer w-[235px] text-sm block relative shadow-md shadow-dark-gray-input/10 rounded-md dark:text-white-txt-elem dark:bg-dark-blue dark:shadow-very-dark-blue-bg"
+        <div className="dropdown text-very-dark-blue-txt bg-white-txt-elem px-[1.7rem] py-[1.25rem] cursor-pointer w-[235px] text-sm block relative shadow-md shadow-dark-gray-input/10 rounded-md dark:text-white-txt-elem dark:bg-dark-blue dark:shadow-very-dark-blue-bg sm:max-h-[56px]"
           onClick={() => setIsOpen(!isOpen)}
         >
           <span>
