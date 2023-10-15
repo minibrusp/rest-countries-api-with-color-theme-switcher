@@ -20,7 +20,7 @@ export default function Pagination({ currentPage, setPage, Offset, data, isLoadi
   return (
     <div className="py-8 flex flex-row justify-center items-center gap-2 w-full">
       <button 
-        className={` p-2 rounded-lg text-xs cursor-pointer ${currentPage == 0 ? "bg-red-400" : "bg-sky-500" } ${currentPage == 0 ? "cursor-auto" : "cursor-pointer" }`} 
+        className={` p-2 rounded-lg text-xs cursor-pointer shadow-back-box shadow-dark-gray-input/60 dark:shadow-very-dark-blue-txt/40 dark:bg-dark-blue ${currentPage == 0 ? " text-dark-gray-input dark:text-dark-gray-input/40 cursor-default" : "dark:text-white-txt-elem shadow-dark-gray-input/60 dark:bg-dark-blue dark:shadow-back-box-dark" } ${currentPage == 0 ? "cursor-auto" : "cursor-pointer" }`} 
         disabled={currentPage < 1 || isLoading}
         onClick={() => setPage("PREV")}
       >
@@ -28,19 +28,19 @@ export default function Pagination({ currentPage, setPage, Offset, data, isLoadi
       </button>
       {
         isLoading ? (
-          <span className="bg-sky-500 p-2 rounded-lg text-xs">
+          <span className="dark:bg-dark-blue shadow-back-box shadow-dark-gray-input/60 dark:shadow-very-dark-blue-txt/40 dark:text-white-txt-elem p-2 rounded-lg text-xs">
             loading...
           </span>
         ) : (
           <span 
-          className="bg-sky-500 p-2 rounded-lg text-xs"
+          className="dark:bg-dark-blue shadow-back-box shadow-dark-gray-input/60 dark:shadow-very-dark-blue-txt/40 dark:text-white-txt-elem p-2 rounded-lg text-xs"
           >
             {`${currentPage + 1} of ${ MAX_PAGE}`}
           </span>
         )
       }
       <button 
-      className={` p-2 rounded-lg text-xs ${((currentPage + 1) >= MAX_PAGE) ? "bg-red-400" : "bg-sky-500" } ${((currentPage + 1) >= 25) ? "cursor-auto" : "cursor-pointer" }`}
+      className={` p-2 rounded-lg text-xs shadow-back-box shadow-dark-gray-input/60 dark:shadow-very-dark-blue-txt/40 ${((currentPage + 1) >= MAX_PAGE) ? "bg-dark-blue text-dark-gray-input dark:text-dark-gray-input/40 cursor-default" : "dark:text-white-txt-elem shadow-dark-gray-input/60 dark:bg-dark-blue dark:shadow-back-box-dark" } ${((currentPage + 1) >= 25) ? "cursor-auto" : "cursor-pointer" }`}
       disabled={((currentPage + 1) >= MAX_PAGE) || isLoading}
       onClick={() => setPage("NEXT")}
       >

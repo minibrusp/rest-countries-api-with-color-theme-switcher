@@ -40,19 +40,21 @@ function Countries() {
           <h2 className="hidden invisible">Countries</h2>
           <CountriesHeader />
           <QueryResult error={error} loading={loading} data={data}>
-            <div className="flex flex-row flex-wrap justify-center items-center gap-[50px] sm:pt-4 sm:items-start xl:gap-16">
+            <div className="flex flex-row flex-wrap justify-center items-center gap-[50px] sm:pt-4 sm:items-start xl:gap-16 xl:px-24">
               { data?.getCountries.countries?.map((country: CountryType) => (
                 <CountryCard key={country.name} country={country} />
               ))}
             </div>
           </QueryResult>
-          <Pagination
-            setPage={updatePage}
-            currentPage={page}
-            Offset={page * PAGE_SIZE}  
-            data={data} 
-            isLoading={loading}
-          />
+          { data && (
+            <Pagination
+              setPage={updatePage}
+              currentPage={page}
+              Offset={page * PAGE_SIZE}  
+              data={data} 
+              isLoading={loading}
+            />
+          )}
         </section>
       </Layout>
     </main>
