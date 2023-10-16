@@ -63,6 +63,7 @@ type Country {
   flag: String,
   regionalBlocs: [RegionalBloc],
   cioc: String,
+  border_country: [Country],
   independent: Boolean
 }
 
@@ -73,5 +74,6 @@ type getCountries {
 
 type Query {
   getCountries(offset: Int, limit: Int, selectFilter: String, searchFilter: String): getCountries!
-  country(id: ID!): Country
+  country(id: ID): Country
+  getCountryByAlpha3(alpha3Code: String): Country
 }

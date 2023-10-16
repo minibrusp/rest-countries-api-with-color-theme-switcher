@@ -26,7 +26,15 @@ const resolvers = {
       let query = { _id: new ObjectId(id) }
       let country = await collection.findOne(query)
 
+      await console.log(country);
+      return country
+    },
+    async getCountryByAlpha3(_, { alpha3Code }, context) {
 
+      let collection = await db.collection("countries")
+      let query = { alpha3Code: alpha3Code }
+      let country = await collection.findOne(query)
+      await console.log(country);
       return country
     }
 

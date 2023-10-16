@@ -1,28 +1,35 @@
 import Layout from "../layout";
 import { BsArrowLeft } from "react-icons/bs";
-import { Link, useParams } from "react-router-dom";
-import { QuerySingleCountry } from "../types/types";
-import { useQuery } from "@apollo/client";
-import { COUNTRY } from "../graphql/query";
-import { useEffect } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import { LazyQuery, QuerySingleCountry } from "../types/types";
+import { useLazyQuery, useQuery } from "@apollo/client";
+import { COUNTRY, COUNTRYBYALPHA3 } from "../graphql/query";
+import { useEffect, useMemo, useState } from "react";
 import LoadingSpinner from "../components/LoadingSpinner";
+import useGetAlphaCountry from "../hooks/useGetAlphaCountry";
 
 
 
 export default function Country() {
   const { id } = useParams()
+  const navigate = useNavigate()
+  const { getCountry, AlphaId, loading: lazyLoading } = useGetAlphaCountry()
+  const NewCountryID = AlphaId
 
   const { loading, error, data } = useQuery<QuerySingleCountry>(COUNTRY, {
     variables: { id }
   })
 
   useEffect(() => {
-    console.log(data)
+    if(!AlphaId) return
+    navigate(`/countries/${AlphaId}`)
+  }, [AlphaId])
 
+  const handleClickBorder = async (border: string) => {
+    await getCountry({ variables: { alpha3Code: border }})
     
-  }, [data])
+  }
 
-  // if(error) return "Could not connect to db."
   if(error) return (
     <main>
       <Layout>
@@ -124,7 +131,14 @@ export default function Country() {
                   <div className="flex justify-start items-start flex-row flex-wrap gap-3">
                     {data?.country.borders?.map((border) => {
                       if(border != null) return (
-                        <span key={border} className="text-xs py-[0.4rem] px-6 rounded-[5px] shadow-back-box shadow-dark-gray-input/60 dark:bg-dark-blue dark:shadow-back-box-dark dark:shadow-very-dark-blue-txt/40 xl:text-sm">{border}</span>
+                        <span 
+                          key={border} 
+                          className="text-xs py-[0.4rem] px-6 rounded-[5px] shadow-back-box shadow-dark-gray-input/60 cursor-pointer dark:bg-dark-blue dark:shadow-back-box-dark dark:shadow-very-dark-blue-txt/40 xl:text-sm"
+                          onClick={() => {
+                            if(lazyLoading) return
+                            handleClickBorder(border)
+                          }}
+                        >{border}</span>
                       )
                     })}
                   </div>

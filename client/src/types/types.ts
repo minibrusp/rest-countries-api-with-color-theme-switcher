@@ -40,6 +40,15 @@ export type QueryListOfCountry = {
   getCountries: CountriesAndCount
 }
 
+export type QueryLazyCountry = {
+  _id: String,
+  name: String,
+}
+
+export type LazyQuery = {
+  getCountryByAlpha3: QueryLazyCountry
+}
+
 export type PaginationProps = {
   currentPage: number,
   setPage: (type: "PREV" | "NEXT") => void,

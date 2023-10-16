@@ -18,3 +18,20 @@ db.countries.countDocuments({"region": "Asia", "name": {$regex: ""}})
  db.countries.createIndex({"alpha3Code": 1})
 
  db.countries.getIndexes()
+
+ db.countries.find({_id: new ObjectId("651853149f2f79142a681852")})
+
+ db.items.aggregate([
+{ $match: { tag: 'blue' } },
+{ $lookup: your_lookup_command }
+])
+
+db.countries.aggregate([
+  { $match: { _id: new ObjectId("651853149f2f79142a681852")}},
+  { $lookup: {
+    from: "countries",
+    localField: "borders",
+    foreignField: "alpha3Code",
+    as: "border_country"
+  }}
+])

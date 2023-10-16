@@ -47,3 +47,12 @@ export const COUNTRY = gql`
   }
 `
 
+export const COUNTRYBYALPHA3 = gql`
+  query GetCountryByAlpha3($alpha3Code: String!) {
+    getCountryByAlpha3(alpha3Code: $alpha3Code) {
+      _id
+      name
+    }
+  }
+`
+
