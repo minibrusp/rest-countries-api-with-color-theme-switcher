@@ -40,3 +40,5 @@ app.listen(PORT, () => {
     console.log(`Apollo Sandbox running on http://localhost:${PORT}/graphql \n`)
   }
 })
+
+export default server
