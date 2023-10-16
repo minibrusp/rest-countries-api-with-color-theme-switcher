@@ -31,7 +31,15 @@ const server = new ApolloServer({
 
 await server.start()
 
-app.use("/graphql", cors({ origin: ['https://rest-countries-api-with-color-theme-switcher-frontend.vercel.app', 'https://studio.apollographql.com']}), json(), expressMiddleware(server))
+app.use(
+  "/graphql", 
+  cors({ 
+    origin: ['https://rest-countries-api-with-color-theme-switcher-frontend.vercel.app', 'https://studio.apollographql.com'],
+    credentials: true,
+  }), 
+  json(), 
+  expressMiddleware(server)
+)
 
 app.listen(PORT, () => {
   if(process.env.PORT) return console.log(`Server is running on port: ${PORT}`);
