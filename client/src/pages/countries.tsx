@@ -2,7 +2,7 @@
 import Layout from "../layout"
 import QueryResult from "../components/QueryResult"
 import { useQuery } from "@apollo/client"
-import { useDeferredValue, useEffect } from "react"
+import { useDeferredValue } from "react"
 import CountriesHeader from "../components/CountriesHeader"
 import CountryCard from "../components/CountryCard"
 import Pagination from "../components/Pagination"
@@ -28,10 +28,6 @@ function Countries() {
       searchFilter: deferedSearchFilter
     }
   })
-  
-  useEffect(() => {
-    console.log('data:', data?.getCountries)
-  }, [data])
 
   return (
     <main>
@@ -49,8 +45,7 @@ function Countries() {
           { data && (
             <Pagination
               setPage={updatePage}
-              currentPage={page}
-              Offset={page * PAGE_SIZE}  
+              currentPage={page} 
               data={data} 
               isLoading={loading}
             />

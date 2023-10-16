@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FaGreaterThan } from "react-icons/fa6";
 import { typeSelected } from "../types/types";
 import { useCountriesStore } from "../stores/useCountriesStore";
@@ -8,7 +8,6 @@ export default function DropdownFilter() {
 
   const selectFilter = useCountriesStore((state) => state.selectFilter)
   const updateSelectFilter = useCountriesStore((state) => state.updateSelectFilter)
-  const page = useCountriesStore((state) => state.page)
   const updatePage = useCountriesStore((state) => state.updatePage)
 
   const [isOpen, setIsOpen] = useState(false)
@@ -18,11 +17,6 @@ export default function DropdownFilter() {
     updatePage("RESET")
     setIsOpen(false)
   }
-
-  useEffect(() => {
-    console.log(page);
-    
-  }, [page])
 
   return (
     <div className="relative">

@@ -1,33 +1,23 @@
 import Layout from "../layout";
 import { BsArrowLeft } from "react-icons/bs";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import { LazyQuery, QuerySingleCountry } from "../types/types";
-import { useLazyQuery, useQuery } from "@apollo/client";
-import { COUNTRY, COUNTRYBYALPHA3 } from "../graphql/query";
-import { useEffect, useMemo, useState } from "react";
+import { QuerySingleCountry } from "../types/types";
+import { useQuery } from "@apollo/client";
+import { COUNTRY } from "../graphql/query";
 import LoadingSpinner from "../components/LoadingSpinner";
-import useGetAlphaCountry from "../hooks/useGetAlphaCountry";
 
 
 
 export default function Country() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { getCountry, AlphaId, loading: lazyLoading } = useGetAlphaCountry()
-  const NewCountryID = AlphaId
 
   const { loading, error, data } = useQuery<QuerySingleCountry>(COUNTRY, {
     variables: { id }
   })
 
-  useEffect(() => {
-    if(!AlphaId) return
-    navigate(`/countries/${AlphaId}`)
-  }, [AlphaId])
-
-  const handleClickBorder = async (border: string) => {
-    await getCountry({ variables: { alpha3Code: border }})
-    
+  const handleClickBorder = async (borderId: string) => {
+    navigate(`/countries/${borderId}`)
   }
 
   if(error) return (
@@ -129,18 +119,20 @@ export default function Country() {
                 <div>
                   {data?.country.borders && <h2 className="font-semibold mb-3">Border Countries:</h2> }
                   <div className="flex justify-start items-start flex-row flex-wrap gap-3">
-                    {data?.country.borders?.map((border) => {
-                      if(border != null) return (
-                        <span 
-                          key={border} 
-                          className="text-xs py-[0.4rem] px-6 rounded-[5px] shadow-back-box shadow-dark-gray-input/60 cursor-pointer dark:bg-dark-blue dark:shadow-back-box-dark dark:shadow-very-dark-blue-txt/40 xl:text-sm"
-                          onClick={() => {
-                            if(lazyLoading) return
-                            handleClickBorder(border)
-                          }}
-                        >{border}</span>
-                      )
-                    })}
+                    {
+                      data?.country.borders &&
+                      data?.country.borders?.map((border) => {
+                        if(border != null) return (
+                          <span 
+                            key={border.name} 
+                            className="text-xs py-[0.4rem] px-6 rounded-[5px] shadow-back-box shadow-dark-gray-input/60 cursor-pointer dark:bg-dark-blue dark:shadow-back-box-dark dark:shadow-very-dark-blue-txt/40 xl:text-sm"
+                            onClick={() => {
+                              handleClickBorder(border._id)
+                            }}
+                          >{border.name}</span>
+                        )
+                      })
+                    }
                   </div>
 
                 </div>

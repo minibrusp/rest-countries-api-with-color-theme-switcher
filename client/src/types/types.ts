@@ -23,7 +23,7 @@ export type CountryType = {
     png: string
   },
   languages?: language[] | undefined
-  borders?: borders[]
+  borders?: CountryType[]
 }
 
 export type CountriesAndCount = {
@@ -52,7 +52,6 @@ export type LazyQuery = {
 export type PaginationProps = {
   currentPage: number,
   setPage: (type: "PREV" | "NEXT") => void,
-  Offset: number,
   data: QueryListOfCountry | undefined,
   isLoading: boolean
 }

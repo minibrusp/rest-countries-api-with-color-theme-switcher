@@ -7,7 +7,6 @@ const resolvers = {
   },
   Query: {
     async getCountries(_, { offset, limit, selectFilter, searchFilter }, context) {
-      console.log("Requested");
 
       let collection = await db.collection("countries")
       if(selectFilter !== "All") {
@@ -20,23 +19,27 @@ const resolvers = {
       return { countries, count }
     },
     async country(_, { id }, context) {
-      console.log("Requested");
 
       let collection = await db.collection("countries")
       let query = { _id: new ObjectId(id) }
       let country = await collection.findOne(query)
 
-      await console.log(country);
+      if(await country.borders) {
+        let newBorders = await country.borders.map(async (border) => {
+          let query = { alpha3Code: border }
+          let country = await collection.findOne(query) 
+          return country
+        })
+  
+        return {
+          ...country, 
+          borders: newBorders
+        }
+      }
+
       return country
     },
-    async getCountryByAlpha3(_, { alpha3Code }, context) {
 
-      let collection = await db.collection("countries")
-      let query = { alpha3Code: alpha3Code }
-      let country = await collection.findOne(query)
-      await console.log(country);
-      return country
-    }
 
   }
 }

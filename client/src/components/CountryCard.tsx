@@ -1,8 +1,6 @@
 import { CountryType } from "../types/types";
 import { Link } from "react-router-dom"
 
-
-
 export default function CountryCard({ country } : { country: CountryType }) {
   return (
     <Link to={`countries/${country._id}`}>

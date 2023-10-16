@@ -67,6 +67,36 @@ type Country {
   independent: Boolean
 }
 
+type CountryWithNewBorders {
+  _id: ID,
+  name: String,
+  topLevelDomain: [String],
+  alpha2Code: String,
+  alpha3Code: String,
+  callingCodes: [String],
+  capital: String,
+  altSpellings: [String],
+  subregion: String,
+  region: String,
+  population: Int,
+  latlng: [Int],
+  demonym: String,
+  area: Int,
+  timezones: [String],
+  borders: [Country],
+  nativeName: String,
+  numericCode: String,
+  flags: FlagSource,
+  currencies: [Currency],
+  languages: [Language],
+  translations: Translation,
+  flag: String,
+  regionalBlocs: [RegionalBloc],
+  cioc: String,
+  border_country: [Country],
+  independent: Boolean
+}
+
 type getCountries {
   countries: [Country!],
   count: Int
@@ -74,6 +104,5 @@ type getCountries {
 
 type Query {
   getCountries(offset: Int, limit: Int, selectFilter: String, searchFilter: String): getCountries!
-  country(id: ID): Country
-  getCountryByAlpha3(alpha3Code: String): Country
+  country(id: ID): CountryWithNewBorders
 }

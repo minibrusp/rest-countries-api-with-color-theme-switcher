@@ -1,15 +1,8 @@
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { PaginationProps } from "../types/types";
 
 
-export default function Pagination({ currentPage, setPage, Offset, data, isLoading } : PaginationProps) {
-
-  useEffect(() => {
-    console.log(`data countries length: `, data?.getCountries.countries?.length);
-    console.log(`currentPage: `, currentPage + 1);
-    console.log(`Offset: `, Offset);
-    
-  }, [data?.getCountries.countries])
+export default function Pagination({ currentPage, setPage, data, isLoading } : PaginationProps) {
 
   const MAX_PAGE = useMemo(() => {
     let result = data?.getCountries.count! / 10
@@ -20,7 +13,7 @@ export default function Pagination({ currentPage, setPage, Offset, data, isLoadi
   return (
     <div className="py-8 flex flex-row justify-center items-center gap-2 w-full">
       <button 
-        className={` p-2 rounded-lg text-xs cursor-pointer shadow-back-box shadow-dark-gray-input/60 dark:shadow-very-dark-blue-txt/40 dark:bg-dark-blue ${currentPage == 0 ? " text-dark-gray-input dark:text-dark-gray-input/40 cursor-default" : "dark:text-white-txt-elem shadow-dark-gray-input/60 dark:bg-dark-blue dark:shadow-back-box-dark" } ${currentPage == 0 ? "cursor-auto" : "cursor-pointer" }`} 
+        className={` p-2 rounded-lg text-xs shadow-back-box shadow-dark-gray-input/60 dark:shadow-very-dark-blue-txt/40 dark:bg-dark-blue ${currentPage == 0 ? " text-dark-gray-input dark:text-dark-gray-input/40 cursor-default" : "dark:text-white-txt-elem shadow-dark-gray-input/60 dark:bg-dark-blue dark:shadow-back-box-dark" } ${currentPage == 0 ? "cursor-default" : "cursor-pointer" }`} 
         disabled={currentPage < 1 || isLoading}
         onClick={() => setPage("PREV")}
       >
@@ -40,7 +33,7 @@ export default function Pagination({ currentPage, setPage, Offset, data, isLoadi
         )
       }
       <button 
-      className={` p-2 rounded-lg text-xs shadow-back-box shadow-dark-gray-input/60 dark:shadow-very-dark-blue-txt/40 ${((currentPage + 1) >= MAX_PAGE) ? "bg-dark-blue text-dark-gray-input dark:text-dark-gray-input/40 cursor-default" : "dark:text-white-txt-elem shadow-dark-gray-input/60 dark:bg-dark-blue dark:shadow-back-box-dark" } ${((currentPage + 1) >= 25) ? "cursor-auto" : "cursor-pointer" }`}
+      className={` p-2 rounded-lg text-xs shadow-back-box shadow-dark-gray-input/60 dark:shadow-very-dark-blue-txt/40 ${((currentPage + 1) >= MAX_PAGE) ? "dark:bg-dark-blue text-dark-gray-input dark:text-dark-gray-input/40 cursor-default" : "dark:text-white-txt-elem shadow-dark-gray-input/60 dark:bg-dark-blue dark:shadow-back-box-dark" } ${((currentPage + 1) >= MAX_PAGE) ? "cursor-default" : "cursor-pointer" }`}
       disabled={((currentPage + 1) >= MAX_PAGE) || isLoading}
       onClick={() => setPage("NEXT")}
       >
