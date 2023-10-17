@@ -34,7 +34,7 @@ await server.start()
 app.use(
   "/graphql", 
   cors({ 
-    origin: ['https://rest-countries-api-with-color-theme-switcher-frontend.vercel.app', 'https://studio.apollographql.com'],
+    origin: "*",
     credentials: true,
   }), 
   json(), 
