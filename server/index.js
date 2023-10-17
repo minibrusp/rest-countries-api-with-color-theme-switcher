@@ -15,7 +15,11 @@ const __dirname = dirname(__filename)
 const PORT = process.env.PORT || 5050
 const app = express()
 
-app.use(cors({ origin: ['https://rest-countries-api-with-color-theme-switcher-frontend.vercel.app', 'https://studio.apollographql.com'] }))
+app.use(cors({ 
+  origin: '',
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE']
+}))
 app.use(express.json())
 
 const typeDefs = gql(
