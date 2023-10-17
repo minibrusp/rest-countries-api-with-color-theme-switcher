@@ -9,6 +9,7 @@ Frontend Mentor's REST Countries API with color theme switcher
 ### Features
   - Its a MERN + Apollo Server4(Graphql) App
   - In the country details page if the bordering country is clicked it will navigate you to its own country details page
+  - pagination and limited to 10
 
 
 ### Design
