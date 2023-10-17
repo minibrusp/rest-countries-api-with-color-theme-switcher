@@ -15,7 +15,7 @@ const __dirname = dirname(__filename)
 const PORT = process.env.PORT || 5050
 const app = express()
 
-app.use(cors())
+app.use(cors({ origin: ['https://rest-countries-api-with-color-theme-switcher-frontend.vercel.app', 'https://studio.apollographql.com'] }))
 app.use(express.json())
 
 const typeDefs = gql(
@@ -27,13 +27,15 @@ const typeDefs = gql(
 const schema = buildSubgraphSchema({ typeDefs, resolvers })
 const server = new ApolloServer({
   schema,
+  playground: true,
+  introspection: true,
 })
 
 await server.start()
 
 app.use(
   "/graphql", 
-  cors({ origin: ['https://rest-countries-api-with-color-theme-switcher-frontend.vercel.app', 'https://studio.apollographql.com'] }), 
+  cors(), 
   json(), 
   expressMiddleware(server)
 )
