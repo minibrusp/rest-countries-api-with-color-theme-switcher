@@ -33,10 +33,7 @@ await server.start()
 
 app.use(
   "/graphql", 
-  cors({ 
-    origin: "*",
-    credentials: true,
-  }), 
+  cors(), 
   json(), 
   expressMiddleware(server)
 )
