@@ -33,7 +33,7 @@ Frontend Mentor's REST Countries API with color theme switcher
 
 ### Links
 
--   Solution URL: [here]()
+-   Solution URL: [here](https://www.frontendmentor.io/solutions/mernapollographql4-serverandclient-rest-countries-api-with-color-theme-_A7QAqQpS2)
 -   Live Site URL: [here](https://rest-countries-api-with-color-theme-switcher-frontend.vercel.app/)
 -   Backend URL for notes: [here](https://rest-countries-api-with-color-theme-switcher-server.vercel.app/)
 
